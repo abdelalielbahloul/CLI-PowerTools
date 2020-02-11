@@ -1,0 +1,31 @@
+{
+  "name": "cli-powertools",
+  "version": "1.0.0",
+  "description": "Power tools using nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abdelalielbahloul/CLI-PowerTools.git"
+  },
+  "keywords": [
+    "Nodejs",
+    "node",
+    "cli",
+    "command",
+    "line",
+    "power",
+    "tools"
+  ],
+  "author": "EL BAHLOUL Abdelali",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abdelalielbahloul/CLI-PowerTools/issues"
+  },
+  "homepage": "https://github.com/abdelalielbahloul/CLI-PowerTools#readme",
+  "dependencies": {
+    "enquirer": "^2.3.4"
+  }
+}
