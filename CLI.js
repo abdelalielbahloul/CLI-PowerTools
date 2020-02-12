@@ -117,7 +117,7 @@ let questions = [
  * create new contact
  */
 program
-    .command("addContact")
+    .command("add-contact")
     .description("Add new contact")
     .action(() => {
 
@@ -164,7 +164,7 @@ program
      * Find contact by his unique name contactName
      */
 program
-    .command('find')
+    .command('find-contact')
     .description('Find a contact')
     .action(() => {
         inquirer.prompt([{
@@ -189,8 +189,24 @@ program
         })
     })
 
-program.parse(process.argv);
+program
+    .command("contacts")
+    .description("Fetch all contacts")
+    .action(() => {
+        Contact.find({}, (err, res) => {
+            if (err) {
+                console.error(chalk.red(`${chalk.underline(err)}`));
+                return;
+            }
+            
+            if (res.length < 1) {
+                console.error(chalk.red(`${chalk.bgRed.white.underline(`No contact found!`)}`));
+                return;
+            }
+            console.log(res);
+            
+        })
+    })
 
-// if (program.force == undefined) {
-    
-// }
+
+program.parse(process.argv);
