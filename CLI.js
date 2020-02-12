@@ -21,12 +21,32 @@ connection();
 let questions = [
     {
         type: "Input",
-        name: "Name",
-        message: "Enter a Name : ",
+        name: "contactName",
+        message: "Enter Contact Name (like user name) : ",
         validate: (answers) => {
             if (answers.length < 1) {
-                return "Please Enter a Name"
+                return "Please Enter Contact Name (like user name)"
             } else {
+                // let regex = /^[a-zA-Z]*[A-Z]+[a-zA-Z]*$/
+                // if (!regex.exec(answers)) {
+                //     return "Please Enter a valid fullName"
+                // }
+                return true
+            }
+        }
+    },
+    {
+        type: "Input",
+        name: "fullName",
+        message: "Enter a Full Name : ",
+        validate: (answers) => {
+            if (answers.length < 1) {
+                return "Please Enter Contact fullName"
+            } else {
+                // let regex = /^[a-zA-Z]*[A-Z]+[a-zA-Z]*$/
+                // if (!regex.exec(answers)) {
+                //     return "Please Enter a valid fullName"
+                // }
                 return true
             }
         }
@@ -34,11 +54,14 @@ let questions = [
     {
         type: "Input",
         name: "Number",
-        message: "Enter a Number : ",
+        message: "Enter Contact Phone Number : ",
         validate: (answers) => {
             if (answers.length < 1) {
                 return "Please Enter a Number"
             } else {
+                let regx = /(\+212|0)([ \-_/]*)(\d[ \-_/]*){9}/
+                if(!regx.exec(answers))
+                    return `Plaese Enter a Valid Morrocain phone number start with ${chalk.underline.black.bgWhite("+212")}`
                 return true
             }
         }
@@ -58,7 +81,7 @@ let questions = [
         ],
         validate: (answers) => {
             if (answers.length < 1) {
-                return "Please Enter a Name"
+                return "Please Enter a Gender"
             } else {
                 return true
             }
@@ -88,7 +111,11 @@ let questions = [
         
 //     })
 
-// advanced method
+// advanced methods
+
+/**
+ * create new contact
+ */
 program
     .command("addContact")
     .description("Add new contact")
@@ -99,17 +126,30 @@ program
                 // console.log(answers);
                 
                 let contact = new Contact({
-                    name: answers.Name,
+                    contactName: answers.contactName,
+                    fullName: answers.fullName,
                     number: answers.Number,
                     gender: answers.Gender
                 })
-                contact.save((err, res) => {
-                    if (err) {
-                        console.error(chalk.red(`Cannot save! for this reason: \n -${chalk.underline(err)}`));
-                        return;
-                    }
-                    console.log(chalk.italic.green("Contact saved Successfully!"));
-                    return;
+
+                inquirer.prompt([{
+                    type: "confirm",
+                    name: "Confirmation",
+                    default: true,
+                    message: "You wand to save this Contact?"
+                }])
+                .then(() => {
+                    contact.save((errs, res) => {
+                        if (errs) {
+                            console.error(chalk.red(`Cannot save! for this reason: \n -${chalk.underline(errs.errmsg)}`));
+                            return;
+                        }
+                        console.log(chalk.italic.green("Contact saved Successfully!"));
+                        
+                    })
+                }).catch( err => {
+                    console.log(err);
+                    
                 })
                 
             })
@@ -120,6 +160,34 @@ program
         
     })
 
+    /**
+     * Find contact by his unique name contactName
+     */
+program
+    .command('find')
+    .description('Find a contact')
+    .action(() => {
+        inquirer.prompt([{
+            type: "Input",
+            name: "contactName",
+            message: "Enter the ConatctName you want to search for : "
+        }])
+        .then(answ => {
+            Contact.findOne({ contactName: answ.contactName }, (err, res) => {
+                if (err) {
+                    console.error(chalk.red(`${chalk.underline(err)}`));
+                    return;
+                }
+                
+                if (res.length < 1) {
+                    console.error(chalk.red(`${chalk.bgRed.white.underline(`No contact found!`)}`));
+                    return;
+                }
+                console.log(res);
+                
+            })
+        })
+    })
 
 program.parse(process.argv);
 
