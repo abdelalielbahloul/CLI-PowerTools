@@ -1,7 +1,7 @@
 {
   "name": "cli-powertools",
   "version": "1.0.0",
-  "description": "Power tools using nodejs",
+  "description": "CLI using nodejs and mongodb with commander.js, inquirer.js and chalk.js",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,7 +17,11 @@
     "command",
     "line",
     "power",
-    "tools"
+    "tools",
+    "commander",
+    "inquirer",
+    "chalk",
+    "mongodb"
   ],
   "author": "EL BAHLOUL Abdelali",
   "license": "ISC",
@@ -29,7 +33,6 @@
     "chalk": "^3.0.0",
     "commander": "^4.1.1",
     "dotenv": "^8.2.0",
-    "figlet": "^1.2.4",
     "inquirer": "^7.0.4",
     "mongoose": "^5.8.11"
   }

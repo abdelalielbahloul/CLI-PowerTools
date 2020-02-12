@@ -1,7 +1,6 @@
 require('dotenv').config();
 const program = require('commander');
 const inquirer = require('inquirer');
-const figlet = require('figlet');
 const chalk = require('chalk');
 const connect = require('./utlis/database');
 const Contact = require('./Models/Contact');
@@ -15,8 +14,6 @@ async function connection(){
 }
 connection();
 
-//initialise the event
-// let appState = new EventEmitter();
 
 let questions = [
     {
@@ -27,10 +24,7 @@ let questions = [
             if (answers.length < 1) {
                 return "Please Enter Contact Name (like user name)"
             } else {
-                // let regex = /^[a-zA-Z]*[A-Z]+[a-zA-Z]*$/
-                // if (!regex.exec(answers)) {
-                //     return "Please Enter a valid fullName"
-                // }
+                
                 return true
             }
         }
@@ -43,10 +37,7 @@ let questions = [
             if (answers.length < 1) {
                 return "Please Enter Contact fullName"
             } else {
-                // let regex = /^[a-zA-Z]*[A-Z]+[a-zA-Z]*$/
-                // if (!regex.exec(answers)) {
-                //     return "Please Enter a valid fullName"
-                // }
+               
                 return true
             }
         }
@@ -189,6 +180,9 @@ program
         })
     })
 
+    /**
+     * fetch al contacts
+    */
 program
     .command("contacts")
     .description("Fetch all contacts")
