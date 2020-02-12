@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 let ContactSchema = mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId, //we use a propriete of mongosse to give for any product an id like 'ad5h_5jd5jsl5jddk8kd'
+    // _id: mongoose.Schema.Types.ObjectId, 
     name: { 
         type: String, 
         required: [
