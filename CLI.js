@@ -50,10 +50,10 @@ let questions = [
         choices: [
             new inquirer.Separator(`${chalk.yellow("=> Gender <= ")}`),
             {
-                name: "Male"
+                name: "male"
             },
             {
-                name: "Female"
+                name: "female"
             }
         ],
         validate: (answers) => {
@@ -90,16 +90,33 @@ let questions = [
 
 // advanced method
 program
-    .command("AddContact")
+    .command("addContact")
     .description("Add new contact")
     .action(() => {
 
         inquirer.prompt(questions)
-            .then((answers) => {
-                console.log(chalk.blue(answers));
+            .then(answers => {
+                // console.log(answers);
+                
+                let contact = new Contact({
+                    name: answers.Name,
+                    number: answers.Number,
+                    gender: answers.Gender
+                })
+                contact.save((err, res) => {
+                    if (err) {
+                        console.error(chalk.red(`Cannot save! for this reason: \n -${chalk.underline(err)}`));
+                        return;
+                    }
+                    console.log(chalk.italic.green("Contact saved Successfully!"));
+                    return;
+                })
                 
             })
-            .catch();
+            .catch(err => {
+                console.error(err);
+                
+            });
         
     })
 
