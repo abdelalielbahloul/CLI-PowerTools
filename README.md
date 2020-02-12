@@ -1,5 +1,7 @@
 # CLI-PowerTools
 This is a cli using nodejs and commander.js
+power-cli.js is a basic build of cli using commander 
+and CLI.js is an example of how to fetch and store data in a mongodb database using command line interface
 
 # All Packages You can use To Build CLI with  nodejs
 + Commander.js
