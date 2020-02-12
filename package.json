@@ -26,7 +26,11 @@
   },
   "homepage": "https://github.com/abdelalielbahloul/CLI-PowerTools#readme",
   "dependencies": {
+    "chalk": "^3.0.0",
     "commander": "^4.1.1",
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "figlet": "^1.2.4",
+    "inquirer": "^7.0.4",
+    "mongoose": "^5.8.11"
   }
 }
