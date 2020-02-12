@@ -12,7 +12,7 @@ const connect = async () => {
 
   db.on("error", console.error.bind(console, "connection error:"));
   await db.once("open", () => {
-    console.log("Database successfully connected");
+    // console.log("Database successfully connected");
   });
 };
 
