@@ -39,7 +39,7 @@ let ContactSchema = mongoose.Schema({
             }
         ]
     }
-});
+},{ timestamps: { createdAt: true, updatedAt: true } });
 
 let Contact = mongoose.model("Contact", ContactSchema);
 
